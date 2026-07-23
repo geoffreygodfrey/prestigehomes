@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Prestige Homes — Luxury Real Estate</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%23C9A96E'/><text x='16' y='22' font-size='16' font-family='serif' text-anchor='middle' fill='%230A0A0B'>PH</text></svg>" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+<style>
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --bg: #0A0A0B;
+    --surface: #1A1A1E;
+    --gold: #C9A96E;
+    --gold-dim: rgba(201, 169, 110, 0.15);
+    --gold-glass: rgba(201, 169, 110, 0.04);
+    --text-primary: #F5F0EB;
+    --text-secondary: #8B8B93;
+    --radius-card: 12px;
+    --radius-input: 8px;
+    --radius-button: 999px;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Outfit', sans-serif;
+    background: var(--bg);
+    color: var(--text-primary);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* ===== NAV ===== */
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.25rem 3rem;
+    height: 72px;
+    background: rgba(10, 10, 11, 0.6);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(245, 240, 235, 0.04);
+}
+
+.brand {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    letter-spacing: 0.04em;
+    text-decoration: none;
+}
+
+.brand span {
+    color: var(--gold);
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+.nav-links a {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--text-secondary);
+    text-decoration: none;
+    transition: color 0.3s ease;
+    font-weight: 500;
+}
+
+.nav-links a:hover {
+    color: var(--gold);
+}
+
+.nav-wa {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: rgba(201, 169, 110, 0.1);
+    border: 1px solid rgba(201, 169, 110, 0.2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gold);
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    flex-shrink: 0;
+}
+
+.nav-wa:hover {
+    background: var(--gold);
+    color: var(--bg);
+}
+
+/* ===== HERO ===== */
+.hero {
+    position: relative;
+    min-height: 100dvh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background:
+        linear-gradient(rgba(10, 10, 11, 0.45), rgba(10, 10, 11, 0.7)),
+        url('https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=1920&q=80');
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+}
+
+.hero-overlay {
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    padding: 6rem 2rem 2rem;
+    max-width: 780px;
+    opacity: 0;
+    transform: translateY(24px);
+    animation: heroIn 0.9s ease 0.2s forwards;
+}
+
+@keyframes heroIn {
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.hero-overlay h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 4rem;
+    font-weight: 700;
+    line-height: 1.1;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+    letter-spacing: -0.01em;
+}
+
+.hero-overlay h1 i {
+    font-style: italic;
+    color: var(--gold);
+}
+
+.hero-overlay .hero-sub {
+    font-size: 1.05rem;
+    color: rgba(245, 240, 235, 0.7);
+    font-weight: 300;
+    line-height: 1.7;
+    max-width: 45ch;
+    margin: 0 auto 2.25rem;
+}
+
+.hero-actions {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.hero-cta {
+    display: inline-block;
+    padding: 0.9rem 2.5rem;
+    background: var(--gold);
+    color: #0A0A0B;
+    border: none;
+    border-radius: var(--radius-button);
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    letter-spacing: 0.02em;
+}
+
+.hero-cta:hover {
+    background: #D4B87A;
+    transform: translateY(-1px);
+    box-shadow: 0 8px 30px rgba(201, 169, 110, 0.25);
+}
+
+.hero-cta.secondary {
+    background: transparent;
+    color: var(--text-primary);
+    border: 1px solid rgba(245, 240, 235, 0.2);
+}
+
+.hero-cta.secondary:hover {
+    border-color: var(--gold);
+    color: var(--gold);
+    background: rgba(201, 169, 110, 0.08);
+    box-shadow: none;
+    transform: translateY(-1px);
+}
+
+/* Scroll indicator */
+.scroll-indicator {
+    position: absolute;
+    bottom: 2rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 1;
+    opacity: 0;
+    animation: fadeInDown 1s ease 1.2s forwards;
+}
+
+.scroll-indicator span {
+    display: block;
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(180deg, var(--gold), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+}
+
+@keyframes scrollPulse {
+    0%, 100% { transform: scaleY(0.5); opacity: 0.3; }
+    50% { transform: scaleY(1); opacity: 1; }
+}
+
+@keyframes fadeInDown {
+    to { opacity: 1; }
+}
+
+/* ===== QUALIFY SECTION ===== */
+.qualify {
+    padding: 6rem 2rem;
+    display: flex;
+    justify-content: center;
+    background: var(--bg);
+    position: relative;
+}
+
+.qualify::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold-dim), transparent);
+}
+
+.glass-card {
+    width: 100%;
+    max-width: 520px;
+    padding: 3rem 3rem;
+    background: rgba(201, 169, 110, 0.03);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 1px solid rgba(201, 169, 110, 0.15);
+    border-radius: var(--radius-card);
+    box-shadow:
+        0 0 60px rgba(201, 169, 110, 0.04),
+        inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+.glass-card h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1.2;
+    color: var(--text-primary);
+    margin-bottom: 0.5rem;
+    text-align: center;
+}
+
+.glass-card .sub {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-bottom: 2rem;
+    text-align: center;
+    font-weight: 300;
+    max-width: 36ch;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.7;
+}
+
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-group label {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 0.4rem;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    background: rgba(245, 240, 235, 0.04);
+    border: 1px solid rgba(245, 240, 235, 0.08);
+    border-radius: var(--radius-input);
+    color: var(--text-primary);
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.9rem;
+    outline: none;
+    transition: border-color 0.3s ease, background 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    border-color: var(--gold);
+    background: rgba(201, 169, 110, 0.06);
+}
+
+.form-group input::placeholder {
+    color: rgba(139, 139, 147, 0.5);
+    font-weight: 300;
+}
+
+.form-group select {
+    cursor: pointer;
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%238B8B93' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+}
+
+.form-group select option {
+    background: var(--surface);
+    color: var(--text-primary);
+}
+
+.submit-btn {
+    width: 100%;
+    padding: 0.9rem;
+    margin-top: 0.5rem;
+    background: var(--gold);
+    color: #0A0A0B;
+    border: none;
+    border-radius: var(--radius-button);
+    font-family: 'Outfit', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    letter-spacing: 0.02em;
+}
+
+.submit-btn:hover {
+    background: #D4B87A;
+    transform: translateY(-1px);
+    box-shadow: 0 8px 30px rgba(201, 169, 110, 0.2);
+}
+
+.submit-btn:active {
+    transform: translateY(0);
+    box-shadow: none;
+}
+
+/* ===== SECTION COMMON ===== */
+section {
+    padding: 6rem 3rem;
+}
+
+.section-reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.section-reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* ===== TESTIMONIAL ===== */
+.testimonial {
+    background: var(--surface);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.testimonial::before {
+    content: '"';
+    position: absolute;
+    top: -0.3em;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 12rem;
+    line-height: 1;
+    color: rgba(201, 169, 110, 0.06);
+    pointer-events: none;
+}
+
+.testimonial blockquote {
+    max-width: 680px;
+    margin: 0 auto 2rem;
+    position: relative;
+    z-index: 1;
+}
+
+.testimonial blockquote p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 400;
+    font-style: italic;
+    line-height: 1.5;
+    color: var(--text-primary);
+}
+
+.testimonial blockquote p::before {
+    content: '\201C';
+    color: var(--gold);
+}
+
+.testimonial blockquote p::after {
+    content: '\201D';
+    color: var(--gold);
+}
+
+.testimonial-author {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    position: relative;
+    z-index: 1;
+}
+
+.testimonial-author img {
+    width: 52px;
+    height: 52px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--gold-dim);
+}
+
+.testimonial-author .author-info {
+    text-align: left;
+}
+
+.testimonial-author .author-info strong {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.testimonial-author .author-info span {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+/* ===== STATS ===== */
+.stats-section {
+    text-align: center;
+    background: var(--bg);
+}
+
+.stats-section .label {
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    color: var(--gold);
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+}
+
+.stats-section h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 3.5rem;
+}
+
+.stats-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.stat-item {
+    padding: 2rem 1.5rem;
+    border: 1px solid rgba(245, 240, 235, 0.06);
+    border-radius: var(--radius-card);
+    background: rgba(245, 240, 235, 0.02);
+    transition: border-color 0.4s ease;
+}
+
+.stat-item:hover {
+    border-color: var(--gold-dim);
+}
+
+.stat-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 3.5rem;
+    font-weight: 700;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+}
+
+.stat-label {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    font-weight: 400;
+    letter-spacing: 0.02em;
+}
+
+.stat-item .stat-underline {
+    width: 0;
+    height: 1px;
+    background: var(--gold);
+    margin: 0.75rem auto 0.5rem;
+    transition: width 1s ease 0.3s;
+}
+
+.stat-item.visible .stat-underline {
+    width: 32px;
+}
+
+/* ===== WHATSAPP HANDOFF ===== */
+.handoff {
+    background: var(--surface);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.handoff::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: radial-gradient(circle at center, rgba(201, 169, 110, 0.03) 0%, transparent 60%);
+    pointer-events: none;
+}
+
+.handoff h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 2.25rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+    position: relative;
+    z-index: 1;
+}
+
+.handoff p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    max-width: 40ch;
+    margin: 0 auto 2.5rem;
+    font-weight: 300;
+    position: relative;
+    z-index: 1;
+}
+
+.wa-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 2.5rem;
+    background: #25D366;
+    color: #0A0A0B;
+    border: none;
+    border-radius: var(--radius-button);
+    font-family: 'Outfit', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    position: relative;
+    z-index: 1;
+}
+
+.wa-btn:hover {
+    background: #20BD5A;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 32px rgba(37, 211, 102, 0.2);
+}
+
+.wa-btn i {
+    font-size: 1.2rem;
+}
+
+/* ===== FOOTER ===== */
+footer {
+    padding: 2rem 3rem;
+    text-align: center;
+    border-top: 1px solid rgba(245, 240, 235, 0.04);
+}
+
+footer p {
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+    font-weight: 300;
+}
+
+/* ===== SCROLL ANIMATION HELPERS ===== */
+.scroll-reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.scroll-reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.scroll-reveal.delay-1 { transition-delay: 0.1s; }
+.scroll-reveal.delay-2 { transition-delay: 0.2s; }
+.scroll-reveal.delay-3 { transition-delay: 0.3s; }
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 900px) {
+    nav {
+        padding: 1rem 1.5rem;
+    }
+
+    .nav-links {
+        gap: 1.25rem;
+    }
+
+    .nav-links a {
+        font-size: 0.65rem;
+        letter-spacing: 0.12em;
+    }
+
+    .hero-overlay h1 {
+        font-size: 2.8rem;
+    }
+
+    .hero-overlay .hero-sub {
+        font-size: 0.95rem;
+    }
+
+    .qualify {
+        padding: 4rem 1.5rem;
+    }
+
+    .glass-card {
+        padding: 2rem 1.5rem;
+    }
+
+    .glass-card h2 {
+        font-size: 1.7rem;
+    }
+
+    section {
+        padding: 4rem 1.5rem;
+    }
+
+    .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+
+    .stat-number {
+        font-size: 2.8rem;
+    }
+
+    .hero-actions {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .hero-cta,
+    .hero-cta.secondary {
+        width: 100%;
+        max-width: 280px;
+        text-align: center;
+    }
+
+    .testimonial blockquote p {
+        font-size: 1.3rem;
+    }
+}
+
+@media (max-width: 600px) {
+    nav {
+        padding: 0.85rem 1rem;
+        height: 64px;
+    }
+
+    .nav-links {
+        gap: 0.75rem;
+    }
+
+    .nav-links a {
+        font-size: 0.6rem;
+        letter-spacing: 0.1em;
+    }
+
+    .hero-overlay h1 {
+        font-size: 2rem;
+    }
+
+    .hero-overlay {
+        padding: 5rem 1.25rem 2rem;
+    }
+
+    .hero-actions {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .hero-cta,
+    .hero-cta.secondary {
+        width: 100%;
+        max-width: 280px;
+        text-align: center;
+    }
+
+    .qualify {
+        padding: 3rem 1.25rem;
+    }
+
+    .glass-card h2 {
+        font-size: 1.5rem;
+    }
+
+    section {
+        padding: 3rem 1.25rem;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hero-overlay,
+    .section-reveal,
+    .scroll-reveal {
+        opacity: 1;
+        transform: none;
+        animation: none;
+        transition: none;
+    }
+
+    .scroll-indicator {
+        display: none;
+    }
+
+    .stat-item .stat-underline {
+        width: 32px;
+    }
+
+    html {
+        scroll-behavior: auto;
+    }
+}
+
+@media (prefers-reduced-transparency: reduce) {
+    .glass-card {
+        background: var(--surface);
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+    }
+
+    nav {
+        background: var(--bg);
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+    }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+    <a href="index.html" class="brand">Prestige<span>Homes</span></a>
+    <div class="nav-links">
+        <a href="catalogue.html">View Catalogue</a>
+        <a href="#contact">Contact</a>
+    </div>
+    <a class="nav-wa" href="https://wa.me/919876543210" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="hero-overlay">
+        <h1>Your <i>Legacy</i> Begins Here</h1>
+        <p class="hero-sub">Discover residences where craftsmanship meets comfort. Inquire for a private viewing.</p>
+        <div class="hero-actions">
+            <a href="#qualify" class="hero-cta">Inquire Now</a>
+            <a href="catalogue.html" class="hero-cta secondary">View Catalogue</a>
+        </div>
+    </div>
+    <div class="scroll-indicator"><span></span></div>
+</section>
+
+<!-- QUALIFY FORM -->
+<section class="qualify section-reveal" id="qualify">
+    <div class="glass-card">
+        <h2>Begin Your Journey</h2>
+        <p class="sub">One of our senior advisors will respond within 24 hours.</p>
+        <form id="qualifyForm" novalidate>
+            <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="name" placeholder="Your full name" required />
+            </div>
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input type="email" id="email" name="email" placeholder="your@email.com" required />
+            </div>
+            <div class="form-group">
+                <label for="phone">Phone Number</label>
+                <input type="tel" id="phone" name="phone" placeholder="+91 9876543210" required />
+            </div>
+            <div class="form-group">
+                <label for="type">Property Interest</label>
+                <select id="type" name="type" required>
+                    <option value="" disabled selected>Select type</option>
+                    <option value="Villa">Villa</option>
+                    <option value="Penthouse">Penthouse</option>
+                    <option value="Apartment">Luxury Apartment</option>
+                    <option value="Estate">Estate</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="budget">Budget Range</label>
+                <select id="budget" name="budget" required>
+                    <option value="" disabled selected>Select budget</option>
+                    <option value="$500K - $1M">$500K - $1M</option>
+                    <option value="$1M - $2M">$1M - $2M</option>
+                    <option value="$2M - $5M">$2M - $5M</option>
+                    <option value="$5M+">$5M+</option>
+                </select>
+            </div>
+            <button type="submit" class="submit-btn">Inquire Now</button>
+        </form>
+    </div>
+</section>
+
+<!-- TESTIMONIAL -->
+<section class="testimonial section-reveal" id="testimonial">
+    <blockquote>
+        <p>Prestige Homes delivered beyond our expectations. The attention to detail is extraordinary.</p>
+    </blockquote>
+    <div class="testimonial-author">
+        <img src="https://images.unsplash.com/photo-1505843513577-22bb7d21e455?auto=format&fit=crop&w=150&h=150&q=80" alt="Rajesh Mehta" loading="lazy" />
+        <div class="author-info">
+            <strong>Rajesh &amp; Anita Mehta</strong>
+            <span>The Skyline Residence</span>
+        </div>
+    </div>
+</section>
+
+<!-- STATS -->
+<section class="stats-section section-reveal" id="stats">
+    <p class="label">Prestige in Numbers</p>
+    <h2>A Legacy of Excellence</h2>
+    <div class="stats-grid">
+        <div class="stat-item scroll-reveal delay-1">
+            <div class="stat-number" data-target="200">0</div>
+            <div class="stat-underline"></div>
+            <p class="stat-label">Luxury Homes Delivered</p>
+        </div>
+        <div class="stat-item scroll-reveal delay-2">
+            <div class="stat-number" data-target="15">0</div>
+            <div class="stat-underline"></div>
+            <p class="stat-label">Years of Excellence</p>
+        </div>
+        <div class="stat-item scroll-reveal delay-3">
+            <div class="stat-number" data-target="49">0</div>
+            <div class="stat-underline"></div>
+            <p class="stat-label">Client Rating <span style="color:var(--gold);font-size:1.6rem;vertical-align:middle;margin-left:0.25rem;">★</span></p>
+        </div>
+    </div>
+</section>
+
+<!-- WHATSAPP HANDOFF -->
+<section class="handoff section-reveal" id="contact">
+    <h2>Let&rsquo;s Discuss Your Vision</h2>
+    <p>One of our senior advisors will respond within the hour. No obligation, entirely private.</p>
+    <a class="wa-btn" href="https://wa.me/919876543210" target="_blank" rel="noopener">
+        <i class="fab fa-whatsapp"></i>
+        Chat on WhatsApp
+    </a>
+</section>
+
+<!-- FOOTER -->
+<footer>
+    <p>&copy; 2026 Prestige Homes. All rights reserved. &mdash; <a href="tel:+919876543210" style="color:var(--gold);text-decoration:none;">+91 9876543210</a><br><a href="https://wolfcanvas.com" target="_blank" rel="noopener" style="color:var(--gold);text-decoration:none;">Designed by WolfCanvas</a></p>
+</footer>
+
+<script>
+(function() {
+    // ── Scroll Reveal ──
+    const revealEls = document.querySelectorAll('.section-reveal, .scroll-reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+                revealObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.15 });
+
+    revealEls.forEach(el => revealObserver.observe(el));
+
+    // ── Stat Counter ──
+    const statNumbers = document.querySelectorAll('.stat-number');
+    const counterObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const el = entry.target;
+                const target = parseInt(el.dataset.target, 10);
+                let current = 0;
+                const step = Math.ceil(target / 40);
+                const interval = setInterval(() => {
+                    current += step;
+                    if (current >= target) {
+                        current = target;
+                        clearInterval(interval);
+                    }
+                    el.textContent = target === 49 ? current + '.' : current;
+                    if (target === 49 && current === target) {
+                        el.textContent = '4.9';
+                    } else if (target === 200 && current === target) {
+                        el.textContent = '200+';
+                    }
+                }, 30);
+                counterObserver.unobserve(el);
+            }
+        });
+    }, { threshold: 0.5 });
+
+    statNumbers.forEach(el => counterObserver.observe(el));
+
+    // ── Form → WhatsApp ──
+    const form = document.getElementById('qualifyForm');
+    const WHATSAPP_NUMBER = '919876543210';
+
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        const name = document.getElementById('name').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const phone = document.getElementById('phone').value.trim();
+        const type = document.getElementById('type').value;
+        const budget = document.getElementById('budget').value;
+
+        if (!name || !email || !phone || !type || !budget) {
+            alert('Please fill in all fields.');
+            return;
+        }
+
+        const message = [
+            'New Inquiry from Prestige Homes',
+            '',
+            'Name: ' + name,
+            'Email: ' + email,
+            'Phone: ' + phone,
+            'Property Interest: ' + type,
+            'Budget: ' + budget
+        ].join('\n');
+
+        const url = 'https://wa.me/' + WHATSAPP_NUMBER + '?text=' + encodeURIComponent(message);
+        window.open(url, '_blank');
+    });
+})();
+</script>
+</body>
+</html>
